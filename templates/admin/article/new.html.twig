@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création{% endblock %}
+
+{% block body %}
+
+<h2>Création d'un nouvel article</h2>
+
+{{ include ('admin/article/_form.html.twig', {button: 'Créer'}) }}
+
+{% endblock %}
