@@ -22,7 +22,9 @@ class ArticleController extends AbstractController
      */
     public function index() : Response
     {
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articleRepository->findBy([], [
+            'date' => 'DESC'
+        ]);
 
         return $this->render('article/index.html.twig', [
             'articles' => $articles

@@ -24,7 +24,9 @@ class AdminChallengeController extends AbstractController
      */
     public function index() : Response
     {
-        $challenges = $this->challengeRepository->findAll();
+        $challenges = $this->challengeRepository->findBy([], [
+            'lastUpdate' => 'DESC'
+        ]);
 
         return $this->render('admin/challenge/index.html.twig', compact('challenges'));
     }

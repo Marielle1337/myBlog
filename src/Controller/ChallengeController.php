@@ -22,7 +22,9 @@ class ChallengeController extends AbstractController
      */
     public function index() : Response
     {
-        $challenges = $this->challengeRepository->findAll();
+        $challenges = $this->challengeRepository->findBy([], [
+            'lastUpdate' => 'DESC'
+        ]);
 
         return $this->render('challenge/index.html.twig', [
             'challenges' => $challenges

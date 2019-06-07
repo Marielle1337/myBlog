@@ -24,7 +24,9 @@ class AdminArticleController extends AbstractController
      */
     public function index() : Response
     {
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articleRepository->findBy([], [
+            'date' => 'DESC'
+        ]);
 
         return $this->render('admin/article/index.html.twig', compact('articles'));
     }
