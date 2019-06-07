@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<h2><a href="{{ path('admin.category.index') }}">Catégories</a></h2>
+<h2><a href="{{ path('admin.challenge.index') }}">Cours</a></h2>
+<h2><a href="{{ path('admin.article.index') }}">Articles</a></h2>
+<h2><a href="{{ path('admin.newsletter.index') }}">Newsletter</a></h2>
+<h2><a href="{{ path('admin.user.index') }}">Utilisateurs</a></h2>
+
+{% endblock %}

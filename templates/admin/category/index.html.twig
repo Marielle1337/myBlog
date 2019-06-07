@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestions des catégories{% endblock %}
+
+{% block body %}
+
+<h2>Gestions des catégories</h2>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+<table class="table table-strip">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for category in categories %}
+        <tr>
+            <td>
+                <a href="{{ path('category.show', {id: category.id, slug: category.slug}) }}">
+                    {{ category.title }}
+                </a>
+            </td>
+            <td>
+                <a class="actionButton"
+                    href="{{ path('admin.category.edit', {id: category.id}) }}"
+                    title="Modifier"
+                >
+                    <i class="fas fa-code"></i>
+                </a>
+                <form
+                    method="post"
+                    class="deleteForm actionButton"
+                    action="{{ path('admin.category.delete', {id: category.id}) }}"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la catégorie « {{ category.title }} » ? ')"
+                >
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}"/>
+                    <button class="deleteButton" title="Supprimer">
+                        <i class="fas fa-biohazard"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-right">
+<a class="btn btn-primary" href="{{ path('admin.category.new') }}">Créer une nouvelle catégorie</a>
+</div>
+
+{% endblock %}

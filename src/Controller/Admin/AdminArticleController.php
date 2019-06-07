@@ -46,7 +46,7 @@ class AdminArticleController extends AbstractController
             return $this->redirectToRoute('article.show', [
                 'id' => $article->getId(),
                 'slug' => $article->getSlug()
-            ], 301);
+            ]);
         }
 
         return $this->render('admin/article/new.html.twig', [

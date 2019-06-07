@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestions des articles{% endblock %}
+
+{% block body %}
+
+<h2>Gestions des articles</h2>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+<table class="table table-strip">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for article in articles %}
+        <tr>
+            <td>
+                <a href="{{ path('article.show', {id: article.id, slug: article.slug}) }}">
+                    {{ article.title }}
+                </a>
+            </td>
+            <td>{{ article.date | date('d/m/Y H:i:s') }}</td>
+            <td>
+                <a class="actionButton"
+                    href="{{ path('admin.article.edit', {id: article.id}) }}"
+                    title="Modifier"
+                >
+                    <i class="fas fa-code"></i>
+                </a>
+                <form
+                    method="post"
+                    class="deleteForm actionButton"
+                    action="{{ path('admin.article.delete', {id: article.id}) }}"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer l\'article « {{ article.title }} » ? ')"
+                >
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}"/>
+                    <button class="deleteButton" title="Supprimer">
+                        <i class="fas fa-biohazard"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-right">
+<a class="btn btn-primary" href="{{ path('admin.article.new') }}">Créer un nouvel article</a>
+</div>
+
+{% endblock %}

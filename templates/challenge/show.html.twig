@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title challenge.title %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+<div class="jumbotron bg-light">
+    <h2 class="text-center">{{ challenge.title }}</h2>
+    <div class="row text-center mt-3">
+        <div class="col-sm my-auto">
+            <span class="align-bottom">Commencé le {{ challenge.dateStart | date('d/m/Y') }}</span>
+        </div>
+        <div class="col-sm my-auto">
+            {% if challenge.dateEnd %}
+                <span class="align-bottom">Terminé le {{ challenge.dateEnd | date('d/m/Y') }}</span>
+            {% else %}
+                <span>En cours</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<p class="mt-5">{{ challenge.description }}</p>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les articles{% endblock %}
+
+{% block body %}
+
+<div>
+    {% for article in articles %}
+
+        <h2>
+            <a href="{{ path('article.show', {id: article.id, slug: article.slug}) }}">
+                {{ article.title }}
+            </a>
+        </h2>
+        <p>{{ article.date | date('d/m/Y H:i:h') }}</p>
+        <p>{{ article.content }}</p>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

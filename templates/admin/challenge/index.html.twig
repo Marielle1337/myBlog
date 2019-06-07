@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestions des challenge{% endblock %}
+
+{% block body %}
+
+<h2>Gestions des challenge</h2>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+<table class="table table-strip">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for challenge in challenges %}
+        <tr>
+            <td>
+                <a href="{{ path('challenge.show', {id: challenge.id, slug: challenge.slug}) }}">
+                    {{ challenge.title }}
+                </a>
+            </td>
+            <td>{{ challenge.dateStart | date('d/m/Y H:i:s') }}</td>
+            <td>{{ challenge.dateEnd ? challenge.dateEnd | date('d/m/Y H:i:s') }}</td>
+            <td>
+                <a class="actionButton"
+                    href="{{ path('admin.challenge.edit', {id: challenge.id}) }}"
+                    title="Modifier"
+                >
+                    <i class="fas fa-code"></i>
+                </a>
+                <form
+                    method="post"
+                    class="deleteForm actionButton"
+                    action="{{ path('admin.challenge.delete', {id: challenge.id}) }}"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le challenge « {{ challenge.title }} » ? ')"
+                >
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ challenge.id) }}"/>
+                    <button class="deleteButton" title="Supprimer">
+                        <i class="fas fa-biohazard"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-right">
+<a class="btn btn-primary" href="{{ path('admin.challenge.new') }}">Créer un nouveau challenge</a>
+</div>
+
+{% endblock %}

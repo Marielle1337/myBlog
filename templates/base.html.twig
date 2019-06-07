@@ -31,6 +31,12 @@
             textarea {
                 min-height: 40rem;
             }
+            footer {
+                min-height: 4rem;
+            }
+            div > .jumbotron.bg-light {
+                padding: 2rem 2rem;
+            }
         </style>
     </head>
     <body>
@@ -48,17 +54,20 @@
                         <a class="nav-link" href="{{ path('article.list') }}">Articles</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('challenge.list') }}">Challenges</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Qui suis-je ?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin.article.index') }}">Admin</a>
+                        <a class="nav-link" href="{{ path('admin.index') }}">Admin</a>
                     </li>
                 </ul>
             </div>
             </div>
         </nav>
 
-        <div class="jumbotron home text-center">
+        <div class="jumbotron jumbotron-fluid bg-dark text-white home text-center">
             <h1>Mon super blog</h1>
         </div>
 
@@ -72,4 +81,7 @@
 
         {% block javascripts %}{% endblock %}
     </body>
+
+    <footer>
+    </footer>
 </html>

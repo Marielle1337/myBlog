@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les challenges{% endblock %}
+
+{% block body %}
+
+{% set rowCount = 0 %}
+
+<div class="row">
+    {% for challenge in challenges %}
+        <div class="col-md-4">
+            <h2>
+                <a href="{{ path('challenge.show', {id: challenge.id, slug: challenge.slug}) }}">
+                    {{ challenge.title }}
+                </a>
+            </h2>
+            <p>{{ challenge.dateStart | date('d/m/Y H:i:h') }}</p>
+            <p>{{ challenge.description }}</p>
+        </div>
+
+        {% set rowCount = rowCount + 1 %}
+
+        {% if rowCount % 3 == 0 %}
+            </div><div class="row">
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}
