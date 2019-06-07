@@ -1,15 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title article.title %}
+{% block title category.title %}
 
 {% block body %}
 
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success">{{ message }}</div>
-{% endfor %}
+<h2 class="text-center mb-5">{{ category.title }}</h2>
 
-<h2>{{ article.title }}</h2>
-<p>{{ article.date | date('d/m/Y H:i:h') }}</p>
-<p>{{ article.content }}</p>
+<div class="row">
+    {% if challenges | length > 0 %}
+        <div class="col-sm">
+            <h2 class="text-center mb-5">Challenges</h2>
+            {% for challenge in challenges %}
+                <h3>
+                    <a href="{{ path('challenge.show', {id: challenge.id, slug: challenge.slug}) }}">
+                        {{ challenge.title }}
+                    </a>
+                </h2>
+                <p>{{ challenge.dateStart | date('d/m/Y') }}</p>
+                <p>{{ challenge.description | truncate(255) }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if articles | length > 0 %}
+        <div class="col-sm">
+            <h2 class="text-center mb-5">Articles</h2>
+            {% for article in articles %}
+                <h3>
+                    <a href="{{ path('article.show', {id: article.id, slug: article.slug}) }}">
+                        {{ article.title }}
+                    </a>
+                </h2>
+                <p>{{ article.date | date('d/m/Y') }}</p>
+                <p>{{ article.content | truncate(255) }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
 
 {% endblock %}

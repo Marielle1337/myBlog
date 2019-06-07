@@ -9,7 +9,6 @@ use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Entity\Category;
-use App\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")

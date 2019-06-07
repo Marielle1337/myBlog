@@ -22,14 +22,6 @@ class ArticleController extends AbstractController
      */
     public function index() : Response
     {
-        /* $article = new Article();
-        $article->setTitle('Mon nouvel article')
-                ->setContent('Contenu de l\'article');
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($article);
-        $entityManager->flush(); */
-
         $articles = $this->articleRepository->findAll();
 
         return $this->render('article/index.html.twig', [

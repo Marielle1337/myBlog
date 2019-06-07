@@ -19,7 +19,7 @@ class ArticleType extends AbstractType
             ->add('title')
             ->add('user', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'first_name'
+                'choice_label' => 'username'
             ])
             ->add('challenge', EntityType::class, [
                 'class' => Challenge::class,
